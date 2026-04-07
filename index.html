@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기초대사량 계산기</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+    }
+
+    .container {
+      width: 300px;
+      margin: 80px auto;
+      padding: 25px;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #7c3aed;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #6d28d9;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f9f5ff;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>기초대사량 계산기</h1>
+
+    <label for="gender">성별</label>
+    <select id="gender">
+      <option value="male">남자</option>
+      <option value="female">여자</option>
+    </select>
+
+    <label for="height">키 (cm)</label>
+    <input type="number" id="height" placeholder="예: 170">
+
+    <label for="weight">몸무게 (kg)</label>
+    <input type="number" id="weight" placeholder="예: 60">
+
+    <label for="age">나이</label>
+    <input type="number" id="age" placeholder="예: 23">
+
+    <button onclick="calculate()">계산하기</button>
+
+    <div id="result">결과가 여기에 표시됩니다.</div>
+  </div>
+
+  <script>
+    function calculate() {
+      const height = document.getElementById("height").value;
+      const weight = document.getElementById("weight").value;
+      const age = document.getElementById("age").value;
+      const gender = document.getElementById("gender").value;
+
+      if (height === "" || weight === "" || age === "") {
+        document.getElementById("result").innerText = "모든 값을 입력해주세요.";
+        return;
+      }
+
+      let bmr;
+
+      if (gender === "male") {
+        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+      } else {
+        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+      }
+
+      document.getElementById("result").innerText =
+        "결과: " + Math.round(bmr) + " kcal";
+    }
+  </script>
+</body>
+</html>
